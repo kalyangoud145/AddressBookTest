@@ -118,6 +118,31 @@ namespace AddressBookTest
             }
         }
 
+        public void DeletePerson()
+        {
+            Console.WriteLine("\n\t\t\tEnter lastname whose data is to be removed");
+            string lastName = utility.InputString();
+            int count = 0;
+            int index = 0;
+            Collection<Person> ToRemove = new Collection<Person>();
+            foreach (Person P in list)
+            {
+                if (lastName.Equals(P.GetLastName()))
+                {
+                    index = list.IndexOf(P);
+                    Console.WriteLine("\n\t\t\tData found\n\n\t\t\tData Removed");
+                    ToRemove.Add(P);
+                    count++;
+                }
+            }
+            list.RemoveAt(index);
+            foreach (Person Q in list)
+            {
+                Console.WriteLine(Q.ToString());
+            }
+            if (count == 0)
+                Console.WriteLine("\n\t\t\tSorry, no such data found");
+        }
 
     }
 }

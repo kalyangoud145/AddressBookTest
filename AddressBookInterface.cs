@@ -8,5 +8,6 @@ namespace AddressBookTest
     {
         public void AddPerson();
         public void EditPerson();
+        public void DeletePerson();
     }
 }
