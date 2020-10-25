@@ -31,22 +31,22 @@ namespace AddressBookTest
         {
             Person person = new Person();
             Console.WriteLine(("\n\t\t\tEnter First Name"));
-            person.SetFirstName("Ravula");
+            person.SetFirstName(utility.InputString());
             Console.WriteLine(person.GetFirstName());
             Console.WriteLine("\n\t\t\tEnter Last Name");
-            person.SetLastName("Kalyan");
+            person.SetLastName(utility.InputString());
             Console.WriteLine(person.GetLastName());
             Console.WriteLine("\n\t\t\tEnter city");
-            person.SetCity("Nalgonda");
+            person.SetCity(utility.InputString());
             Console.WriteLine(person.GetCity());
             Console.WriteLine("\n\t\t\tEnter State");
-            person.SetState("Telangana");
+            person.SetState(utility.InputString());
             Console.WriteLine(person.GetState());
             Console.WriteLine("\n\t\t\tEnter ZipCode");
-            person.SetZip(508001);
+            person.SetZip(utility.InputInteger());
             Console.WriteLine(person.GetZip());
             Console.WriteLine("\n\t\t\tEnter Phone Number");
-            person.SetPhoneNumber("7732063720");
+            person.SetPhoneNumber(utility.InputString());
             Console.WriteLine(person.GetPhoneNumber());
             return person;
         }
