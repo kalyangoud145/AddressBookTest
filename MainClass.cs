@@ -6,7 +6,8 @@ namespace AddressBookTest
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to AddressBook Problem");
+            AddressBookImplementation addressBookImpl = new AddressBookImplementation();
+            addressBookImpl.AddPerson();
         }
     }
 }
