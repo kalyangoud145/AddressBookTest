@@ -8,6 +8,7 @@ namespace AddressBookTest
         {
             AddressBookImplementation addressBookImpl = new AddressBookImplementation();
             addressBookImpl.AddPerson();
+            addressBookImpl.EditPerson();
         }
     }
 }

@@ -7,5 +7,6 @@ namespace AddressBookTest
     interface AddressBookInterface
     {
         public void AddPerson();
+        public void EditPerson();
     }
 }
