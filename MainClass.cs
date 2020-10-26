@@ -2,12 +2,16 @@
 
 namespace AddressBookTest
 {
+	/// <summary>
+	/// Main class where all methods are called
+	/// </summary>
     class MainClass
     {
         static void Main(string[] args)
         {
+			//Created object of AddressBookImplementation
 			AddressBookImplementation addressBookImpl = new AddressBookImplementation();
-
+			//menu for performing different tasks
 			int i = 0;
 			while (i == 0)
 			{
@@ -23,12 +27,15 @@ namespace AddressBookTest
 				switch (choose)
 				{
 					case 1:
+						//Calls AddPerson method
 						addressBookImpl.AddPerson();
 						break;
 					case 2:
+						//calls EditPerson method
 						addressBookImpl.EditPerson();
 						break;
 					case 3:
+						//calls DeletePerson method
 						addressBookImpl.DeletePerson();
 						break;
 					case 4:
