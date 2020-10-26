@@ -8,7 +8,6 @@ namespace AddressBookTest
         {
 			AddressBookImplementation addressBookImpl = new AddressBookImplementation();
 
-			Utility utility = new Utility();
 			int i = 0;
 			while (i == 0)
 			{
@@ -20,7 +19,7 @@ namespace AddressBookTest
 						+ "\t\t\t| 3. DeletePerson        |\n"
 						+ "\t\t\t| 4. Close addressbook   |\n"
 						+ "\t\t\t|________________________|");
-				int choose = (int)utility.InputInteger();
+				int choose = (int)addressBookImpl.InputInteger();
 				switch (choose)
 				{
 					case 1:

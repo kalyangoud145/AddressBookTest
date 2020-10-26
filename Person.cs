@@ -4,6 +4,9 @@ using System.Text;
 
 namespace AddressBookTest
 {
+    /// <summary>
+    /// Person pojo class
+    /// </summary>
     class Person
     {
         public string firstName;
@@ -12,7 +15,7 @@ namespace AddressBookTest
         public string state;
         public long zip;
         public string phoneNumber;
-
+        //Getter and setters for person details
         public void SetFirstName(String firstName)
         {
             this.firstName = firstName;
@@ -73,7 +76,7 @@ namespace AddressBookTest
         {
             return phoneNumber;
         }
-
+        //returns persons data as string
         override
         public string ToString()
         {
