@@ -9,8 +9,8 @@ namespace AddressBookTest
     /// </summary>
     interface AddressBookInterface
     {
-        public void AddPerson();
-        public void EditPerson();
-        public void DeletePerson();
+        public void AddContacts();
+        public void editContact();
+        public void deleteContact();
     }
 }

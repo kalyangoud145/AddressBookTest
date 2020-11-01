@@ -7,7 +7,7 @@ namespace AddressBookTest
     /// <summary>
     /// Person pojo class
     /// </summary>
-    class Person
+    public class Contacts
     {
         public string firstName;
         public string lastName;
