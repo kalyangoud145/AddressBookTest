@@ -7,7 +7,7 @@ namespace AddressBookTest
     class MultipleAddressBook
     {
         /// <summary>
-        /// multipleAddressMapper is a data structure used to store All AddressBooks created in the project
+        /// multipleAddressMapper is  used to store All AddressBooks created in the project
         /// which can be accessed with the help of their name
         /// </summary>
         private Dictionary<string, AddressBook> multipleAddressMapper = new Dictionary<string, AddressBook>();

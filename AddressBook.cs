@@ -15,7 +15,7 @@ namespace AddressBookTest
         /// </summary>
         public List<Contacts> contactList = new List<Contacts>();
         /// <summary>
-        /// nameToContactMapper is used to access contact details using name of person
+        /// contactFromDatabase is used to access contact details using name of person
         /// </summary>
         public Dictionary<string, Contacts> contactFromDatabase = new Dictionary<string, Contacts>();
 
@@ -28,7 +28,7 @@ namespace AddressBookTest
             string first_name;
             while (flag)
             {
-                Console.WriteLine("\n\t\t\tEnter First Name of Contact to check duplicate");
+                Console.WriteLine("\n\t\t\tEnter First Name of Contact ");
                 first_name = InputString();
                 if (this.contactFromDatabase.ContainsKey(first_name))
                 {
@@ -61,7 +61,7 @@ namespace AddressBookTest
                     Console.WriteLine(contacts.ToString());
                 }
                 Console.WriteLine("want to add more contacts then press 1 or press other than 1");
-                int choice = Convert.ToInt32(Console.ReadLine());
+                int choice = (int)InputInteger();
                 if (choice == 1)
                 {
                     AddContacts();
@@ -70,17 +70,11 @@ namespace AddressBookTest
                 {
                     flag = false;
                 }
-                // Console.WriteLine("\nTo Add a New Contact in other address book Enter YES");
-                // string option = Console.ReadLine();
-                //if (option != "YES")
-                //{
-                flag = false;
-                // }
             }
         }
 
         /// <summary>
-        /// EditDetails is used to modify contact details of a person using complete name
+        /// EditDetails is used to modify contact details of a person using firstname 
         /// </summary>
         public void editContact()
         {
@@ -88,7 +82,7 @@ namespace AddressBookTest
             while (flag)
             {
                 Console.WriteLine("\nTo modify details, enter the firstname");
-                string name = Console.ReadLine();
+                string name = InputString();
                 if (contactFromDatabase.ContainsKey(name))
                 {
                     Contacts contact = contactFromDatabase[name];
@@ -99,32 +93,31 @@ namespace AddressBookTest
                     {
                         case 1:
                             Console.WriteLine("Enter First Name of Contact");
-                            string firstName = Console.ReadLine();
+                            string firstName = InputString();
                             contact.firstName = firstName;
                             Console.WriteLine("Enter Last Name of Contact");
-                            string lastName = Console.ReadLine();
+                            string lastName = InputString();
                             contact.lastName = lastName;
                             break;
                         case 2:
                             Console.WriteLine("Enter City");
-                            string city = Console.ReadLine();
+                            string city = InputString();
                             contact.city = city;
                             Console.WriteLine("Enter state");
-                            string state = Console.ReadLine();
+                            string state = InputString();
                             contact.state = state;
                             Console.WriteLine("Enter zip");
-                            int zip = Convert.ToInt32(Console.ReadLine());
+                            int zip = (int)InputInteger();
                             contact.zip = zip;
                             break;
                         case 3:
                             Console.WriteLine("Enter Phone Number");
-                            string phoneNumber = Console.ReadLine();
+                            string phoneNumber = InputString();
                             contact.phoneNumber = phoneNumber;
                             break;
                     }
                     Console.WriteLine("\nDetails modified successfully with following entries: ");
                     Console.WriteLine("FirstName: " + contact.firstName + "\nLast Name :" + contact.lastName);
-                    //  Console.WriteLine("Address: " + contact.address + "\nCity: " + contact.city);
                     Console.WriteLine("State: " + contact.state + "\nZip: " + contact.zip);
                     Console.WriteLine("Phone Number: " + contact.phoneNumber);
                 }
@@ -137,20 +130,22 @@ namespace AddressBookTest
                 if (option != "YES")
                     flag = false;
             }
-
-
         }
         /// <summary>
-        /// DeleteContact function is used to delete Contact from AddressBook using full name of the person
+        /// DeleteContact function is used to delete Contact from AddressBook using firstname of the person
         /// </summary>
         public void deleteContact()
         {
             Console.WriteLine("\nTo delete details, enter the firstname");
-            string name = Console.ReadLine();
+            string name = InputString();
             if (contactFromDatabase.ContainsKey(name))
             {
                 contactFromDatabase.Remove(name);
                 Console.WriteLine("Contact has been deleted");
+            }
+            else
+            {
+                Console.WriteLine("Contact does not exists");
             }
         }
 
