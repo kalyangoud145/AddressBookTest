@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace AddressBookTest
@@ -8,179 +9,37 @@ namespace AddressBookTest
     /// <summary>
     /// AddressBook implementation class for performing different methods
     /// </summary>
-    class AddressBook : AddressBookInterface
+    class AddressBook 
     {
-        /// <summary>
-        /// contactList stores all contacts of one AddressBook
-        /// </summary>
-        public List<Contacts> contactList = new List<Contacts>();
-        /// <summary>
-        /// contactFromDatabase is used to access contact details using name of person
-        /// </summary>
-        public Dictionary<string, Contacts> contactFromDatabase = new Dictionary<string, Contacts>();
-
-        /// <summary>
-        /// This function is used to add new Contact in AddressBook
-        /// </summary>
-        public void AddContacts()
+        //ContactList for maintaining person details
+        public List<Contact> ContactList;
+        public AddressBook()
         {
-            bool flag = true;
-            string first_name;
-            while (flag)
-            {
-                Console.WriteLine("\n\t\t\tEnter First Name of Contact ");
-                first_name = InputString();
-                if (this.contactFromDatabase.ContainsKey(first_name))
-                {
-                    Console.WriteLine("A contact already exist with this name, try again!\n");
-                    AddContacts();
-                    return;
-                }
-                Contacts contact = new Contacts();
-                contact.SetFirstName(first_name);
-                Console.WriteLine(contact.GetFirstName());
-                Console.WriteLine("\n\t\t\tEnter Last Name");
-                contact.SetLastName(InputString());
-                Console.WriteLine(contact.GetLastName());
-                Console.WriteLine("\n\t\t\tEnter city");
-                contact.SetCity(InputString());
-                Console.WriteLine(contact.GetCity());
-                Console.WriteLine("\n\t\t\tEnter State");
-                contact.SetState(InputString());
-                Console.WriteLine(contact.GetState());
-                Console.WriteLine("\n\t\t\tEnter ZipCode");
-                contact.SetZip(InputInteger());
-                Console.WriteLine(contact.GetZip());
-                Console.WriteLine("\n\t\t\tEnter Phone Number");
-                contact.SetPhoneNumber(InputString());
-                Console.WriteLine(contact.GetPhoneNumber());
-                this.contactList.Add(contact);
-                this.contactFromDatabase.Add(contact.firstName, contact);
-                foreach (Contacts contacts in contactList)
-                {
-                    Console.WriteLine(contacts.ToString());
-                }
-                Console.WriteLine("want to add more contacts then press 1 or press other than 1");
-                int choice = (int)InputInteger();
-                if (choice == 1)
-                {
-                    AddContacts();
-                }
-                else
-                {
-                    flag = false;
-                }
-            }
+            this.ContactList = new List<Contact>();
         }
-
-        /// <summary>
-        /// EditDetails is used to modify contact details of a person using firstname 
-        /// </summary>
-        public void editContact()
+        //Add Contact to Address Book
+        public void AddContact(Contact contactObj)
         {
-            bool flag = true;
-            while (flag)
-            {
-                Console.WriteLine("\nTo modify details, enter the firstname");
-                string name = InputString();
-                if (contactFromDatabase.ContainsKey(name))
-                {
-                    Contacts contact = contactFromDatabase[name];
-                    Console.WriteLine("Enter Latest Details of Contact!");
-                    Console.WriteLine("\t\t\t1.To edit Firstname and lastname\n\t\t\t2.To edit city,State and zip\n" + "\t\t\t3. To edit Phone Number\n");
-                    int editChoice = (int)InputInteger();
-                    switch (editChoice)
-                    {
-                        case 1:
-                            Console.WriteLine("Enter First Name of Contact");
-                            string firstName = InputString();
-                            contact.firstName = firstName;
-                            Console.WriteLine("Enter Last Name of Contact");
-                            string lastName = InputString();
-                            contact.lastName = lastName;
-                            break;
-                        case 2:
-                            Console.WriteLine("Enter City");
-                            string city = InputString();
-                            contact.city = city;
-                            Console.WriteLine("Enter state");
-                            string state = InputString();
-                            contact.state = state;
-                            Console.WriteLine("Enter zip");
-                            int zip = (int)InputInteger();
-                            contact.zip = zip;
-                            break;
-                        case 3:
-                            Console.WriteLine("Enter Phone Number");
-                            string phoneNumber = InputString();
-                            contact.phoneNumber = phoneNumber;
-                            break;
-                    }
-                    Console.WriteLine("\nDetails modified successfully with following entries: ");
-                    Console.WriteLine("FirstName: " + contact.firstName + "\nLast Name :" + contact.lastName);
-                    Console.WriteLine("State: " + contact.state + "\nZip: " + contact.zip);
-                    Console.WriteLine("Phone Number: " + contact.phoneNumber);
-                }
-                else
-                {
-                    Console.WriteLine("Entered name did't match with any record!");
-                }
-                Console.WriteLine("\nTo update more contact details enter YES");
-                string option = Console.ReadLine();
-                if (option != "YES")
-                    flag = false;
-            }
-        }
-        /// <summary>
-        /// DeleteContact function is used to delete Contact from AddressBook using firstname of the person
-        /// </summary>
-        public void deleteContact()
-        {
-            Console.WriteLine("\nTo delete details, enter the firstname");
-            string name = InputString();
-            if (contactFromDatabase.ContainsKey(name))
-            {
-                contactFromDatabase.Remove(name);
-                Console.WriteLine("Contact has been deleted");
-            }
+            //Checks if any duplicates exists
+            if (this.ContactList.Find(e => e.Equals(contactObj)) != null)
+                Console.WriteLine("The Contact Already Exists! Try Again.");
             else
-            {
-                Console.WriteLine("Contact does not exists");
-            }
+                this.ContactList.Add(contactObj);
         }
-
-        /// <summary>
-        ///Reads input the string and return that 
-        /// </summary>
-        /// <returns></returns>
-        public string InputString()
+        //Find Contact Object Index By Mobile Number
+        public int FindByPhoneNum(long phoneNumber)
         {
-            try
-            {
-                return Console.ReadLine();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            return "";
+            return this.ContactList.FindIndex(contact => contact.PhoneNumber.Equals(phoneNumber));
         }
-        /// <summary>
-        /// Reads input the integer and return that 
-        /// </summary>
-        /// <returns></returns>
-        public long InputInteger()
+        //Find Contact Object Index By FirstName
+        public int FindByFirstName(string firstName)
         {
-            try
-            {
-                return Convert.ToInt64(Console.ReadLine());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            return 0;
+            return this.ContactList.FindIndex(contact => contact.FirstName.Equals(firstName));
         }
-
+        //Delete a Given Contact By Index passed
+        public void DeleteContact(int index)
+        {
+            this.ContactList.RemoveAt(index);
+        }
     }
 }
