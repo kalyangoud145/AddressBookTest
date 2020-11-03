@@ -25,7 +25,6 @@ namespace AddressBookTest
                        + "\t\t\t| 1. New addressbook              |\n"
                        + "\t\t\t| 2. open existing                |\n"
                        + "\t\t\t| 3. View Contact By City or State|\n"
-                       + "\t\t\t| 4. Count by city                |\n"
                        + "\t\t\t| 5. Exit                         |\n"
                        + "\t\t\t|_________________________________|");
                 choice = (int)InputInteger();
