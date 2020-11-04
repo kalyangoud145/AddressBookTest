@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace AddressBookTest
 {
-    class AddressBookMain 
+    class AddressBookMain
     {
         //Dictionary for storing multiple addressBooks using name as key
         public static Dictionary<string, AddressBook> AddressBookMap = new Dictionary<string, AddressBook>();
@@ -25,6 +26,7 @@ namespace AddressBookTest
                        + "\t\t\t| 1. New addressbook              |\n"
                        + "\t\t\t| 2. open existing                |\n"
                        + "\t\t\t| 3. View Contact By City or State|\n"
+                       + "\t\t\t| 4. Count by city or state       |\n"
                        + "\t\t\t| 5. Exit                         |\n"
                        + "\t\t\t|_________________________________|");
                 choice = (int)InputInteger();
@@ -43,6 +45,9 @@ namespace AddressBookTest
                         break;
                     case 3:
                         ViewPersonByCityOrState();
+                        break;
+                    case 4:
+                        CountPersonByCityOrState();
                         break;
                 }
             } while (choice != 5);
@@ -88,7 +93,6 @@ namespace AddressBookTest
                       + "\t\t\t| 1. Add Contact                  |\n"
                       + "\t\t\t| 2. Edit Contact                 |\n"
                       + "\t\t\t| 3. Delete Contact               |\n"
-                      + "\t\t\t| 4. Count by city                |\n"
                       + "\t\t\t| 0.Exit                          |\n"
                       + "\t\t\t|_________________________________|");
                 choice = (int)InputInteger();
@@ -123,8 +127,8 @@ namespace AddressBookTest
                         Console.WriteLine("Enter the First Name of Contact you wish to delete");
                         string firstName = InputString();
                         //FindByFirstName gets index of person based on first name
-                        int idx = addressBook.FindByFirstName(firstName);
-                        if (idx == -1)
+                        int index1 = addressBook.FindByFirstName(firstName);
+                        if (index1 == -1)
                         {
                             Console.WriteLine("No Contact Exists with Following First Name");
                             continue;
@@ -132,7 +136,7 @@ namespace AddressBookTest
                         else
                         {
                             //Calls delete contact and deletes details in particular index location 
-                            addressBook.DeleteContact(idx);
+                            addressBook.DeleteContact(index1);
                             Console.WriteLine("Contact Deleted Successfully");
                         }
                         break;
@@ -182,6 +186,40 @@ namespace AddressBookTest
                     }
                     break;
             }
+        }
+        /// <summary>
+        /// Method gives the count of persons by city or state
+        /// </summary>
+        public static void CountPersonByCityOrState()
+        {
+            int choice;
+            Console.WriteLine("1.To count Person Contact By City \n2.To count Person Contact By State");
+            choice = (int)InputInteger();
+            if (choice == 1)
+            {
+                int count = 0;
+                Console.WriteLine("Enter the city name");
+                string city = InputString();
+                foreach (KeyValuePair<Contact, string> kvp in CitywiseContactMap)
+                {
+                    if (kvp.Value.Equals(city))
+                        count++;
+                }
+                System.Console.WriteLine($"{count} contacts in given city");
+            }
+            else
+            {
+                int count = 0;
+                Console.WriteLine("Enter the State name");
+                string state = InputString();
+                foreach (KeyValuePair<Contact, string> kvp in StatewiseContactMap)
+                {
+                    if (kvp.Value.Equals(state))
+                        count++;
+                }
+                System.Console.WriteLine($"{count} contacts in given state");
+            }
+
         }
         /// <summary>
         ///Reads input the string and return that 
