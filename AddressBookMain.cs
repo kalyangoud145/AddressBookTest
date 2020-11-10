@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 
@@ -93,6 +94,8 @@ namespace AddressBookTest
                       + "\t\t\t| 1. Add Contact                  |\n"
                       + "\t\t\t| 2. Edit Contact                 |\n"
                       + "\t\t\t| 3. Delete Contact               |\n"
+                      + "\t\t\t| 4. File I/P Operation           |\n"
+                      + "\t\t\t| 5. File O/P Operation           |\n"
                       + "\t\t\t| 0.Exit                          |\n"
                       + "\t\t\t|_________________________________|");
                 choice = (int)InputInteger();
@@ -139,6 +142,14 @@ namespace AddressBookTest
                             addressBook.DeleteContact(index1);
                             Console.WriteLine("Contact Deleted Successfully");
                         }
+                        break;
+                    case 4:
+                        FileIOOperations fileIOOperations = new FileIOOperations();
+                        fileIOOperations.WriteToFile(AddressBookMap);
+                        break;
+                    case 5:
+                        FileIOOperations fileIOOperations1 = new FileIOOperations();
+                        fileIOOperations1.ReadFromFile();
                         break;
                 }
             } while (choice != 0);
@@ -253,6 +264,5 @@ namespace AddressBookTest
             }
             return 0;
         }
-
     }
 }
