@@ -96,6 +96,8 @@ namespace AddressBookTest
                       + "\t\t\t| 3. Delete Contact               |\n"
                       + "\t\t\t| 4. File I/P Operation           |\n"
                       + "\t\t\t| 5. File O/P Operation           |\n"
+                      + "\t\t\t| 6. Sort By firstname            |\n"
+                      + "\t\t\t| 7. Display all                  |\n"
                       + "\t\t\t| 0.Exit                          |\n"
                       + "\t\t\t|_________________________________|");
                 choice = (int)InputInteger();
@@ -150,6 +152,12 @@ namespace AddressBookTest
                     case 5:
                         FileIOOperations fileIOOperations1 = new FileIOOperations();
                         fileIOOperations1.ReadFromFile();
+                        break;
+                    case 6:
+                        addressBook.SortByFirstName();
+                        break;
+                    case 7:
+                        addressBook.Display();
                         break;
                 }
             } while (choice != 0);

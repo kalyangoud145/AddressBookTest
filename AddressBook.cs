@@ -41,5 +41,29 @@ namespace AddressBookTest
         {
             this.ContactList.RemoveAt(index);
         }
+        public List<Contact> SortByFirstName()
+        {
+            
+            return this.ContactList.OrderBy(contact => contact.FirstName).ToList();
+        }
+        public void Display()
+        {
+            foreach(Contact contacts in ContactList)
+            {
+                Console.WriteLine(contacts.ToString());
+            }
+        }
+        public List<Contact> SortByCity()
+        {
+            return this.ContactList.OrderBy(contact => contact.City).ToList();
+        }
+        public List<Contact> SortByState()
+        {
+            return this.ContactList.OrderBy(contact => contact.State).ToList();
+        }
+        public List<Contact> SortByZip()
+        {
+            return this.ContactList.OrderBy(contact => contact.Zip).ToList();
+        }
     }
 }
