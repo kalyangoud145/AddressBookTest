@@ -98,6 +98,7 @@ namespace AddressBookTest
                       + "\t\t\t| 5. File O/P Operation           |\n"
                       + "\t\t\t| 6. Sort By firstname            |\n"
                       + "\t\t\t| 7. Display all                  |\n"
+                      + "\t\t\t| 8. Sort by city or state or zip |\n"
                       + "\t\t\t| 0.Exit                          |\n"
                       + "\t\t\t|_________________________________|");
                 choice = (int)InputInteger();
@@ -158,6 +159,27 @@ namespace AddressBookTest
                         break;
                     case 7:
                         addressBook.Display();
+                        break;
+                    case 8:
+                        Console.WriteLine("\t\t\t__________________________________\n"
+                     + "\t\t\t|      ------                     |\n"
+                     + "\t\t\t| 1. Sort by city                 |\n"
+                     + "\t\t\t| 2. Sort by zip                  |\n"
+                     + "\t\t\t| 3. Sort by state                |\n"
+                     + "\t\t\t|_________________________________|");
+                        int option =(int) InputInteger();
+                        switch (option)
+                        {
+                            case 1:
+                                addressBook.SortByCity();
+                                break;
+                            case 2:
+                                addressBook.SortByZip();
+                                break;
+                            default:
+                                addressBook.SortByState();
+                                break;
+                        }
                         break;
                 }
             } while (choice != 0);

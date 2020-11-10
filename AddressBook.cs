@@ -41,11 +41,18 @@ namespace AddressBookTest
         {
             this.ContactList.RemoveAt(index);
         }
+        /// <summary>
+        /// Sorts the persons based on the first name
+        /// </summary>
+        /// <returns></returns>
         public List<Contact> SortByFirstName()
         {
             
             return this.ContactList.OrderBy(contact => contact.FirstName).ToList();
         }
+        /// <summary>
+        /// Displays all the list
+        /// </summary>
         public void Display()
         {
             foreach(Contact contacts in ContactList)
@@ -53,14 +60,26 @@ namespace AddressBookTest
                 Console.WriteLine(contacts.ToString());
             }
         }
+        /// <summary>
+        /// Sorts the persons by city
+        /// </summary>
+        /// <returns></returns>
         public List<Contact> SortByCity()
         {
             return this.ContactList.OrderBy(contact => contact.City).ToList();
         }
+        /// <summary>
+        /// Sorts the persons by state
+        /// </summary>
+        /// <returns></returns>
         public List<Contact> SortByState()
         {
             return this.ContactList.OrderBy(contact => contact.State).ToList();
         }
+        /// <summary>
+        /// Sorts the persons by zip
+        /// </summary>
+        /// <returns></returns>
         public List<Contact> SortByZip()
         {
             return this.ContactList.OrderBy(contact => contact.Zip).ToList();
