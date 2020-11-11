@@ -4,22 +4,19 @@ using System.Text;
 
 namespace AddressBookTest
 {
-    class Contact
+    /// <summary>
+    /// Pojo class for person
+    /// </summary>
+    public class Contact
     {
-        /// <summary>
-        /// Gets or sets the person details
-        /// </summary>
-        /// <value>
-        /// The first name.
-        /// </value>
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public int Zip { get; set; }
-        public long PhoneNumber { get; set; }
         public string Email { get; set; }
+        public string Zip { get; set; }
+        public string PhoneNumber { get; set; }
         /// <summary>
         /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
         /// </summary>
@@ -29,15 +26,31 @@ namespace AddressBookTest
         /// </returns>
         public override bool Equals(object obj)
         {
-            Contact contact = obj as Contact;
-            if (obj == null)
+            Contact contact = (Contact)obj;
+            if (contact == null)
                 return false;
-            return this.PhoneNumber.Equals(contact.PhoneNumber);
+            else
+                return FirstName.Equals(contact.FirstName) && LastName.Equals(contact.LastName);
         }
-        //Prints the Person details
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(FirstName, LastName);
+        }
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
-            return $"Name : {FirstName} {LastName} \nAddress : {Address} \nCity : {City} \nState : {State} \nZip : {Zip} \nPhone : {PhoneNumber} \nEmail : {Email}";
+            return "First Name :" + FirstName + "\nLast Name : " + LastName + "\nCity : " + City + "\nState : " + State + "\nEmail : " + Email + "\nZip : " + Zip + "\nPhone Number : " + PhoneNumber + "\n";
         }
     }
 }
